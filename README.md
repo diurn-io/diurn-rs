@@ -2,8 +2,7 @@
 
 Exchange calendars and trading hours for the world's markets, from the
 [Diurn API](https://diurn.io): every session, holiday and early close, keyed
-by MIC, with how each day is evidenced. A day Diurn cannot answer is never
-reported as open or closed.
+by MIC, with how each day is evidenced.
 
 ```toml
 [dependencies]
