@@ -1,0 +1,50 @@
+[package]
+name = "diurn"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.85"
+description = "Exchange calendars and trading hours for the world's markets, from the Diurn API"
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+homepage = "https://diurn.io/docs/rust/"
+documentation = "https://docs.rs/diurn"
+repository = "https://github.com/diurn-io/diurn-rs"
+keywords = ["exchange-calendar", "trading-hours", "holidays", "mic", "iso10383"]
+categories = ["api-bindings", "date-and-time", "finance"]
+include = ["src/**/*", "README.md", "LICENSE-MIT", "LICENSE-APACHE", "Cargo.toml"]
+
+[workspace]
+members = [".", "xtask"]
+
+[features]
+default = ["rustls"]
+# TLS: rustls (default) or the platform's native TLS.
+rustls = ["reqwest/rustls"]
+native-tls = ["reqwest/native-tls"]
+# `diurn::blocking::Client`, the same operations without async.
+blocking = ["reqwest/blocking"]
+
+[dependencies]
+diurn-mic = "0.2"
+jiff = { version = "0.2", default-features = false, features = ["std", "alloc", "serde", "tz-system", "tzdb-bundle-platform", "tzdb-zoneinfo"] }
+reqwest = { version = "0.13", default-features = false, features = ["http2"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+thiserror = "2.0"
+tokio = { version = "1", features = ["time"] }
+
+[dev-dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time"] }
+wiremock = "0.6"
+url = "2"
+
+[package.metadata.docs.rs]
+all-features = false
+features = ["blocking"]
+
+[lints.rust]
+unsafe_code = "forbid"
+missing_docs = "warn"
+
+[lints.clippy]
+all = { level = "warn", priority = -1 }

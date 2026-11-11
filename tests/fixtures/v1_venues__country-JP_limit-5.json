@@ -1,0 +1,70 @@
+{
+  "venues": [
+    {
+      "mic": "BAJD",
+      "operating_mic": "BAJD",
+      "name": "BANK OF AMERICA MERRILL LYNCH - JAPAN INSTINCT X",
+      "country": "JP",
+      "status": "ACTIVE",
+      "timezone": "Asia/Tokyo",
+      "resolution": {
+        "kind": "country",
+        "via": "JP"
+      },
+      "products": []
+    },
+    {
+      "mic": "BASX",
+      "operating_mic": "BASX",
+      "name": "BANK OF AMERICA MERRILL LYNCH - SIMPLEX BLAST X",
+      "country": "JP",
+      "status": "ACTIVE",
+      "timezone": "Asia/Tokyo",
+      "resolution": {
+        "kind": "country",
+        "via": "JP"
+      },
+      "products": []
+    },
+    {
+      "mic": "BETP",
+      "operating_mic": "BETP",
+      "name": "BLOOMBERG TRADEBOOK JAPAN LIMITED",
+      "country": "JP",
+      "status": "ACTIVE",
+      "timezone": "Asia/Tokyo",
+      "resolution": {
+        "kind": "country",
+        "via": "JP"
+      },
+      "products": []
+    },
+    {
+      "mic": "BGCJ",
+      "operating_mic": "BGCJ",
+      "name": "BGC SHOKEN KAISHA LTD – ETP",
+      "country": "JP",
+      "status": "ACTIVE",
+      "timezone": "Asia/Tokyo",
+      "resolution": {
+        "kind": "country",
+        "via": "JP"
+      },
+      "products": []
+    },
+    {
+      "mic": "BNPX",
+      "operating_mic": "BNPX",
+      "name": "BNP PARIBAS ALTERNATIVE TRADING SYSTEM",
+      "country": "JP",
+      "status": "ACTIVE",
+      "timezone": "Asia/Tokyo",
+      "resolution": {
+        "kind": "country",
+        "via": "JP"
+      },
+      "products": []
+    }
+  ],
+  "next_cursor": "BNPX"
+}

@@ -1,0 +1,13 @@
+{
+  "mic": "XNYS",
+  "operating_mic": "XNYS",
+  "name": "NEW YORK STOCK EXCHANGE, INC.",
+  "country": "US",
+  "status": "ACTIVE",
+  "timezone": "America/New_York",
+  "resolution": {
+    "kind": "own",
+    "via": "XNYS"
+  },
+  "products": []
+}

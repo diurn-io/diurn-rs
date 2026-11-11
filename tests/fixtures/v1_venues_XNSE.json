@@ -1,0 +1,16 @@
+{
+  "mic": "XNSE",
+  "operating_mic": "XNSE",
+  "name": "NATIONAL STOCK EXCHANGE OF INDIA",
+  "country": "IN",
+  "status": "ACTIVE",
+  "timezone": "Asia/Kolkata",
+  "resolution": {
+    "kind": "own",
+    "via": "XNSE"
+  },
+  "products": [
+    "stocks on which derivative contracts are available",
+    "Securities that are not eligible to participate in the closing auction session"
+  ]
+}
