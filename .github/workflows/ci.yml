@@ -1,0 +1,66 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  # Publishing a GitHub release checks everything and publishes to crates.io.
+  release:
+    types: [published]
+permissions:
+  contents: read
+env:
+  CARGO_TERM_COLOR: always
+  RUSTFLAGS: -D warnings
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: rustup toolchain install stable --profile minimal --component clippy,rustfmt
+      - run: cargo fmt --all --check
+      - name: The generated wire layer matches openapi.json
+        run: cargo run --locked -p xtask -- generate --check
+      - run: cargo clippy --locked --all-targets -- -D warnings
+      - run: cargo clippy --locked --all-targets --features blocking -- -D warnings
+      - run: cargo test --locked
+      - run: cargo test --locked --features blocking
+      - name: The docs build without warnings
+        env:
+          RUSTDOCFLAGS: -D warnings
+        run: cargo doc --locked --no-deps --features blocking
+
+  msrv:
+    name: The library builds on its rust-version (1.85)
+    # The library only: a dev-dependency (wiremock) needs a newer Rust for
+    # the tests, which run on stable above.
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: rustup toolchain install 1.85 --profile minimal
+      - run: cargo +1.85 build --locked --lib
+      - run: cargo +1.85 build --locked --lib --features blocking
+
+  package:
+    name: The crate builds from what it ships
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo package --locked
+      - name: README and both licenses are in it
+        run: |
+          list=$(cargo package --locked --list)
+          for f in README.md LICENSE-MIT LICENSE-APACHE src/generated/models.rs; do
+            echo "$list" | grep -qx "$f" || { echo "missing $f" >&2; exit 1; }
+          done
+
+  publish:
+    name: Publish
+    if: github.event_name == 'release'
+    needs: [test, msrv, package]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - run: cargo publish --locked
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
