@@ -1,8 +1,8 @@
 # diurn
 
 Exchange calendars and trading hours for the world's markets, from the
-[Diurn API](https://diurn.io): every session, holiday and early close, keyed
-by MIC, with how each day is evidenced.
+[Diurn API](https://diurn.io): every session, holiday, and early close, keyed
+by MIC.
 
 ```toml
 [dependencies]
